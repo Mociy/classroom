@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.classroom.dao.UserDao">
+
+    <select id="getStudent" parameterType="String" resultType="student">
+        SELECT * FROM student WHERE student_id=#{student_id};
+    </select>
+
+    <select id="getByTitle" parameterType="string" resultType="video">
+        SELECT * FROM video WHERE title like #{title};
+    </select>
+
+    <select id="getBrowsed" parameterType="String" resultType="browsed">
+        SELECT * FROM browsed WHERE student_id=#{student_id};
+    </select>
+
+    <select id="queryBrowsed" parameterType="browsed" resultType="browsed">
+        SELECT * FROM browsed WHERE student_id=#{student_id} and video_id=#{video_id};
+    </select>
+
+    <select id="queryCollection" parameterType="myCollection" resultType="myCollection">
+        SELECT * FROM collections WHERE student_id=#{student_id} and video_id=#{video_id};
+    </select>
+
+    <select id="getCollections" parameterType="String" resultType="myCollection">
+        SELECT * FROM collections WHERE student_id=#{student_id};
+    </select>
+
+    <insert id="addComplaint" parameterType="complaint">
+        INSERT INTO complaint VALUES (null,#{video_id},#{complaint_content},#{video_src},#{author},#{create_time});
+    </insert>
+
+    <insert id="addStudent" parameterType="student">
+        INSERT INTO student VALUES (#{student_id},#{name},#{avatarUrl});
+    </insert>
+
+    <insert id="addBrowsed" parameterType="browsed">
+        INSERT INTO  browsed VALUES (null,#{student_id},#{video_id},#{image_src},#{title});
+    </insert>
+
+    <insert id="addCollection" parameterType="myCollection">
+        INSERT INTO collections VALUES (null,#{student_id},#{video_id},#{image_src},#{title});
+    </insert>
+
+    <update id="updateName" parameterType="student">
+        UPDATE student SET nickName=#{nickName} WHERE student_id=#{student_id};
+    </update>
+
+    <delete id="removeCollection" parameterType="myCollection">
+          DELETE FROM collections WHERE student_id=#{student_id} and video_id=#{video_id};
+    </delete>
+</mapper>

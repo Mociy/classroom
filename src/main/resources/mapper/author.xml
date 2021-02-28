@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.classroom.dao.AuthorDao">
+    
+    <select id="isExists" parameterType="string" resultType="string">
+        SELECT password FROM author WHERE name=#{name};
+    </select>
+    <select id="getId" parameterType="string" resultType="string">
+        SELECT id FROM author WHERE name=#{name};
+    </select>
+
+    <select id="isChecking" parameterType="string" resultType="Integer">
+        SELECT flag FROM credentials WHERE author_id=#{author_id};
+    </select>
+    <select id="getVideosByAuthor" parameterType="String" resultType="video">
+        SELECT * FROM video WHERE author=#{author} ;
+    </select>
+
+    <select id="getReason" parameterType="string" resultType="string">
+        SELECT reason FROM reason WHERE author_id=#{author_id};
+    </select>
+
+    <insert id="addAuthor" parameterType="author">
+        INSERT  INTO  author VALUES (null,#{name},#{password},null,0,#{mailbox});
+    </insert>
+    <insert id="check" parameterType="credentials">
+        INSERT  INTO  credentials VALUES (#{author_id},#{name},#{id_card},#{id_card_image},#{teacher_certificate_image},#{create_time},0);
+    </insert>
+
+    <delete id="deleteReason" parameterType="string">
+        DELETE FROM reason WHERE author_id=#{author_id};
+    </delete>
+
+    <delete id="delete_this" parameterType="string" >
+        DELETE FROM video WHERE video_id=#{video_id};
+    </delete>
+</mapper>

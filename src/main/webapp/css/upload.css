@@ -1,0 +1,66 @@
+
+.i_style {
+    background: #436EEE;
+    border:0;
+    border-radius: 30px;
+    height: 30px;
+    width: 150px;
+}
+#v_form{
+    margin-top: 100px;
+    background: #ffffff;
+    height: 800px;
+    width: 500px;
+    padding: 16px;
+}
+body{
+    background:#F2F2F2;
+}
+#app{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#one{
+    padding: 16px;
+    border-bottom: 1px solid #aaaaaa;
+}
+#two{
+    padding: 16px;
+
+    border-bottom: 1px solid #aaaaaa;
+}
+#three{
+    padding: 16px;
+
+    border-bottom: 1px solid #aaaaaa;
+}
+#three img{
+
+    height: 140px;
+    width: 210px;
+}
+#four{
+    padding: 16px;
+    border-bottom: 1px solid #aaaaaa;
+}
+.five{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+.menu{
+    text-align: center;
+    width: 50px;
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    border: solid 1px #1C86EE;
+    padding: 4px;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+.selected{
+    background: #1874CD;
+}

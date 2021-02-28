@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.classroom.dao.ClassroomDao">
+          <select id="getCoursesByStudent_id" parameterType="String" resultType="course">
+              SELECT * FROM course WHERE course_id IN (SELECT course_id FROM c_s WHERE student_id=#{student_id});
+          </select>
+
+          <select id="getWorksByCourse_id" parameterType="int" resultType="work">
+              SELECT * FROM work WHERE course_id=#{course_id} ORDER BY create_time DESC ;
+          </select>
+
+          <select id="getImages" parameterType="int" resultType="w_i">
+              SELECT * FROM w_i WHERE work_id=#{work_id};
+          </select>
+
+          <select id="getWorkByWork_id" parameterType="int" resultType="work">
+              SELECT * FROM work WHERE work_id=#{work_id};
+          </select>
+
+          <insert id="addWork" parameterType="work" useGeneratedKeys="true" keyProperty="work_id" >
+              INSERT INTO  work VALUES (null,#{course_id},#{work_descr},#{create_time});
+          </insert>
+
+          <insert id="addStudent_work" parameterType="workInfo">
+              INSERT INTO workInfo VALUES (#{work_id},#{student_id},#{nickName},#{work_descr},#{create_time});
+          </insert>
+
+          <insert id="addImage" parameterType="w_i" >
+              INSERT INTO w_i VALUES (#{work_id},#{image_src});
+          </insert>
+
+          <insert id="addStudent_image" parameterType="w_s_i">
+              INSERT INTO w_s_i VALUES (#{work_id},#{student_id},#{image_src});
+          </insert>
+
+</mapper>

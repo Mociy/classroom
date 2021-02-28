@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.classroom.dao.MultiMediaDao">
+    <select id="getVideosByCategory" parameterType="String" resultType="video">
+        SELECT * FROM video WHERE category=#{category} AND video_src!='https://www.cupidwall.cn/classroom/video/zm.png';
+    </select>
+    <select id="getVideoById" parameterType="String" resultType="video">
+        SELECT * FROM video WHERE video_id=#{video_id};
+    </select>
+
+    <select id="getVideosByAuthor" parameterType="String" resultType="video">
+        SELECT * FROM video WHERE author=#{author} AND video_src!='https://www.cupidwall.cn/classroom/video/zm.png';
+    </select>
+    <select id="getCommentsById" parameterType="String" resultType="comment">
+        SELECT * FROM comments WHERE video_id=#{video};
+    </select>
+
+    <select id="getAll" parameterType="int" resultType="video">
+        SELECT * FROM video order by date limit #{page},6 DESC ;
+    </select>
+
+    <update id="addCollection" parameterType="String">
+        UPDATE video SET collections=collections+1 WHERE video_id=#{video_id};
+    </update>
+
+    <update id="removeCollection" parameterType="String">
+        UPDATE video SET collections=collections-1 WHERE video_id=#{video_id};
+    </update>
+
+    <update id="addComments" parameterType="String">
+        UPDATE video SET v_comments=v_comments+1 WHERE video_id=#{video_id};
+    </update>
+    <update id="addPlay" parameterType="String">
+        UPDATE video SET total_playback=total_playback+1 WHERE video_id=#{video_id};
+    </update>
+
+    <update id="removeComments" parameterType="String">
+        UPDATE video SET v_comments=v_comments-1 WHERE video_id=#{video_id};
+    </update>
+
+    <update id="updateVideo_src" parameterType="video">
+        UPDATE video SET video_src=#{video_src} WHERE video_id=#{video_id};
+    </update>
+
+    <insert id="addVideo" parameterType="video">
+        INSERT INTO video VALUES (#{video_id},#{video_src},#{author},#{category},#{image_src},#{title},0,0,0,#{create_time});
+    </insert>
+
+    <insert id="addComment" parameterType="Comment">
+        INSERT INTO  comments VALUES (#{video_id},#{student_id},#{text},#{color},#{time},#{avatarUrl},#{nickName})
+    </insert>
+</mapper>
